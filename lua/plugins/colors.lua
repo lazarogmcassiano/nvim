@@ -1,0 +1,39 @@
+return {
+  {
+    "folke/tokyonight.nvim",
+
+    lazy = false,
+    priority = 1000,
+
+    opts = {
+      transparent = true,
+    },
+
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
+
+      -- Transparência geral
+      local groups = {
+        "Normal",
+        "NormalNC",
+        "NormalFloat",
+        "FloatBorder",
+        "SignColumn",
+        "EndOfBuffer",
+
+        -- Neo-tree
+        "NeoTreeNormal",
+        "NeoTreeNormalNC",
+        "NeoTreeEndOfBuffer",
+        "NeoTreeVertSplit",
+        "NeoTreeWinSeparator",
+        "NeoTreeCursorLine",
+      }
+
+      for _, group in ipairs(groups) do
+        vim.api.nvim_set_hl(0, group, { bg = "none" })
+      end
+    end,
+  },
+}
