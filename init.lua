@@ -2,12 +2,27 @@
 
 vim.g.mapleader = " "
 
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+})
+
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+vim.lsp.buf.format({ async = true })
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
+vim.keymap.set("n", "<leader>oi", function()
+  vim.lsp.buf.code_action({
+    apply = true,
+  })
+end, { desc = "Organize imports" })
+
 
 vim.opt.termguicolors = true
 

@@ -17,6 +17,29 @@ local config = {
         "build.gradle",
         ".git",
     }),
+
+    settings = {
+        java = {
+            format = {
+                enabled = true,
+            },
+
+            errors = {
+                incompleteClasspath = {
+                    severity = "warning",
+                },
+            },
+
+            saveActions = {
+                organizeImports = true,
+            },
+        },
+    },
+
+    init_options = {
+        extendedClientCapabilities = 
+            jdtls.extendedClientCapabilities,
+    },
 }
 
 jdtls.start_or_attach(config)

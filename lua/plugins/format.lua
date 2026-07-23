@@ -1,53 +1,55 @@
 return {
+    {
+        "stevearc/conform.nvim",
 
-{
-    "stevearc/conform.nvim",
+        config = function()
 
-    config = function()
+            require("conform").setup({
 
-        require("conform").setup({
+                formatters_by_ft = {
 
-            formatters_by_ft = {
+                    python = {
+                        "ruff_format"
+                    },
 
+                    javascript = {
+                        "prettier"
+                    },
 
-                python = {
-                    "ruff_format"
+                    typescript = {
+                        "prettier"
+                    },
+
+                    sh = {
+                        "shfmt"
+                    },
+
+                    java = {
+                        "jdtls"
+                    },
+
                 },
 
-
-                javascript = {
-                    "prettier"
-                },
-
-
-                typescript = {
-                    "prettier"
-                },
-
-
-                sh = {
-                    "shfmt"
+                format_on_save = {
+                    timeout_ms = 1000,
+                    lsp_format = "fallback",
                 }
 
-            }
-
-        })
+            })
 
 
-        vim.keymap.set(
-            "n",
-            "<leader>f",
+            vim.keymap.set(
+                "n",
+                "<leader>f",
+                function()
+                    require("conform").format({
+                        lsp_fallback = true,
+                        async = true,
+                    })
+                end,
+                { desc = "Formatar código" }
+            )
 
-            function()
-
-                require("conform")
-                .format()
-
-            end
-
-        )
-
-    end
-}
-
+        end
+    }
 }
